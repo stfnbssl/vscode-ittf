@@ -1,0 +1,89 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ITTF",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#node"
+		},
+		{
+			"include": "#include"
+		},
+		{
+			"include": "#mix"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"begin": "\\$\\$",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.ittf"
+						}
+					},
+					"end": "\\n",
+					"name": "comment.line.number-sign.ittf"
+				},
+				{
+					"begin": "\\$\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.ittf"
+						}
+					},
+					"end": "\\*\\$",
+					"name": "comment.line.number-sign.ittf"
+				}
+			]				
+		},
+		"include": {
+			"patterns": [
+				{
+					"name": "fragment.include",
+					"match": "(\\$include)"
+				}
+			]
+		},
+		"mix": {
+			"patterns": [
+				{
+					"name": "fragment.mix",
+					"begin": "^(\\s*)(\\w+)\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "punctuation.separator.mix.arguments.ittf",
+							"match": "\\,"
+						},{
+							"include": "#argument"
+						}
+					]
+				}
+			]
+		},
+		"argument": {
+			"patterns": [
+				{
+					"name": "fragment.include",
+					"match": "(\\s*)(.*)(\\s*)"
+				}
+			]
+		},
+		"node": {
+			"patterns": [
+				{
+					"name": "node.leaf",
+					"match": "^(\\s+\\w+)(?!\\()(\\s+\\w+)*$"
+				},{
+					"name": "node.root",
+					"match": "^(\\w+)"
+				}
+			]
+		}
+	},
+	"scopeName": "source.ittf"
+}
