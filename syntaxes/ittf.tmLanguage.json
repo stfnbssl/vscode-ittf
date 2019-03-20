@@ -13,6 +13,9 @@
 		},
 		{
 			"include": "#mix"
+		},
+		{
+			"include": "#command"
 		}
 	],
 	"repository": {
@@ -68,7 +71,7 @@
 		"argument": {
 			"patterns": [
 				{
-					"name": "fragment.include",
+					"name": "variable.parameter",
 					"match": "(\\s*)(.*)(\\s*)"
 				}
 			]
@@ -76,13 +79,47 @@
 		"node": {
 			"patterns": [
 				{
-					"name": "node.leaf",
-					"match": "^(\\s+\\w+)(?!\\()(\\s+\\w+)*$"
+					"match": "^\\s+(\\w+)(?!\\()\\s+(.*)$",
+				    "captures": {
+						"1": { "name" : "entity.name.tag" },
+						"2": { "name" : "support.variable" }
+					}
 				},{
-					"name": "node.root",
-					"match": "^(\\w+)"
+					"match": "^(\\w+)(?!\\()\\s+(.*)$",
+					"captures": {
+						"1": { "name" : "entity.name.tag" },
+						"2": { "name" : "support.variable" }
+					}
 				}
 			]
+		},
+		"command": {
+			"patterns": [
+				{
+					"match": "^\\s+(\\$\\w+)\\s+(.*)",
+					"captures": {
+						"1": { "name" : "entity.name.function" },
+						"2": { "name" : "support.variable" }
+					}
+				},
+				{
+					"match": "^(\\$\\w+)\\s+(.*)",
+					"captures": {
+						"1": { "name" : "entity.name.function" },
+						"2": { "name" : "support.variable" }
+					}
+				}
+			]
+		},
+		"interpolation": {
+			"patterns": [{
+				"match": "(\\$\\{)(\\w+)(\\})",
+				"captures": {
+					"1": { "name" : "entity.name.function" },
+					"2": { "name" : "support.variable" },
+					"3": { "name" : "entity.name.function" }
+				}
+			}]
 		}
 	},
 	"scopeName": "source.ittf"
