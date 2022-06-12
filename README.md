@@ -2,9 +2,8 @@
 VSCode language services for .ittf documents.
 
 ## Suggested colors
-entity.name.function.root green
-
-+ name string               yellow
-+ name keyword              red
-+ name support.class        azure
-+ name variable.parameter   orange
++ entity.name.function.root green
++ string yellow
++ keyword red
++ support.class azure
++ variable.parameter orange
